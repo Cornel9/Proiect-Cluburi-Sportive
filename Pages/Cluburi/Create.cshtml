@@ -1,0 +1,87 @@
+﻿@page
+@model Proiect_Cluburi_Sportive.Pages.Cluburi.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Club</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Club.Nume" class="control-label"></label>
+                <input asp-for="Club.Nume" class="form-control" />
+                <span asp-validation-for="Club.Nume" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Club.Manager" class="control-label"></label>
+                <input asp-for="Club.Manager" class="form-control" />
+                <span asp-validation-for="Club.Manager" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Club.Valoare" class="control-label"></label>
+                <input asp-for="Club.Valoare" class="form-control" />
+                <span asp-validation-for="Club.Valoare" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Club.DataInfiintarii" class="control-label"></label>
+                <input asp-for="Club.DataInfiintarii" class="form-control" />
+                <span asp-validation-for="Club.DataInfiintarii" class="textdanger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Club.PartenerID" class="control-label">Nume Partener</label>
+                <select asp-for="Club.PartenerID" class="form-control" asp-items="ViewBag.PartenerID">
+                </select>
+                <span asp-validation-for="Club.PartenerID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Club.CompetitieID" class="control-label">Nume Competitie</label>
+                <select asp-for="Club.CompetitieID" class="form-control" asp-items="ViewBag.CompetitieID">
+                </select>
+                <span asp-validation-for="Club.CompetitieID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+            <div class="form-group">
+             <div class="table">
+             <table>
+             <tr>
+             @{
+             int cnt = 0;
+             foreach (var cat in Model.AssignedSectieDataList)
+             {
+             if (cnt++ % 3 == 0)
+             {
+             @:</tr><tr>
+             }
+            @:<td>
+             <input type="checkbox"
+             name="selectedSectii"
+            value="@cat.SectieID"
+             @(Html.Raw(cat.Assigned ?
+            "checked=\"checked\"" : "")) />
+             @cat.SectieID @: @cat.Nume
+             @:</td>
+             }
+             @:</tr>
+             }
+             </table>
+             </div>
+ </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

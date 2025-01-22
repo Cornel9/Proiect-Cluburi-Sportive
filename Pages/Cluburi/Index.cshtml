@@ -1,0 +1,98 @@
+﻿@page "/"
+@model Proiect_Cluburi_Sportive.Pages.Cluburi.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<form asp-page="./Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find Club / Competitie:
+            <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+            <input type="submit" value="Search" class="btn btn-primary" />             
+        </p>
+    </div>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.NumeSort">  
+                @Html.DisplayNameFor(model => model.Club[0].Nume)
+                </a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Club[0].Manager)
+            </th>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.ValoareSort">
+                @Html.DisplayNameFor(model => model.Club[0].Valoare)
+                </a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Club[0].DataInfiintarii)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Club[0].Partener.NumePartener)
+            </th>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.CompetitieSort">
+                @Html.DisplayNameFor(model => model.Club[0].Competitie.NumeCompetitie)
+                </a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Club[0].SectiiClub)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ClubD.Cluburi)
+        {
+            string selectedRow = "";
+            if (item.ID == Model.ClubID)
+            {
+                selectedRow = "table-success";
+            }
+            <tr class="@selectedRow">
+                <td>                                         
+                    @Html.DisplayFor(modelItem => item.Nume)                    
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Manager)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Valoare)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataInfiintarii)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Partener.NumePartener)
+                </td>
+                <td>                    
+                    @Html.DisplayFor(modelItem => item.Competitie.NumeCompetitie)                    
+                </td>
+                <td>
+                    @{
+                        foreach (var sectie in item.SectiiClub)
+                        {
+                            @sectie.Sectie.ID @: @sectie.Sectie.NumeSectie <br />
+                        }
+                    }
+                </td>
+
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,43 @@
+﻿@page
+@model Proiect_Cluburi_Sportive.Pages.Cluburi.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Club</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Club.Nume)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Club.Nume)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Club.Manager)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Club.Manager)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Club.Valoare)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Club.Valoare)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Club.DataInfiintarii)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Club.DataInfiintarii)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Club.ID">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>
